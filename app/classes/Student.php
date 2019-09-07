@@ -8,7 +8,7 @@ class Student
 //        $data = (object)$_POST;
 
         extract($_POST);
-       $link = mysqli_connect("localhost","root","","Student_Information");
+       $link = mysqli_connect("localhost","root","","student_information");
 
 //       $sql    = "INSERT INTO students (name,email,mobile) VALUES('$data->name','$data->email','$data->mobile')";
 
@@ -24,7 +24,7 @@ class Student
     }
 
     public function getAllStudentInfo(){
-        $link = mysqli_connect("localhost","root","","Student_Information");
+        $link = mysqli_connect("localhost","root","","student_information");
         $sql  = "SELECT * FROM students";
         if ($result = mysqli_query($link,$sql))
         {
@@ -35,7 +35,7 @@ class Student
         }
     }
     public function getStudentInfoById($id){
-        $link = mysqli_connect("localhost","root","","Student_Information");
+        $link = mysqli_connect("localhost","root","","student_information");
         $sql  = "SELECT * FROM students WHERE id='$id'";
         if ($result = mysqli_query($link,$sql))
         {
@@ -48,7 +48,7 @@ class Student
 
     public function updateStudentInfo(){
         extract($_POST);
-        $link = mysqli_connect("localhost","root","","Student_Information");
+        $link = mysqli_connect("localhost","root","","student_information");
         $sql  = "UPDATE students SET name='$name',email='$email',mobile='$mobile' WHERE id='$id'";
         if ($message = mysqli_query($link,$sql)){
             header("Location: view-student.php");
@@ -58,7 +58,7 @@ class Student
         }
     }
     public function deleteStudentInfo($id){
-        $link = mysqli_connect("localhost","root","","Student_Information");
+        $link = mysqli_connect("localhost","root","","student_information");
         $sql  = "DELETE FROM students WHERE id='$id'";
         if ($message = mysqli_query($link,$sql)){
             header("Location: view-student.php");
@@ -69,7 +69,7 @@ class Student
     }
     public function searchItemBySearchItem(){
         extract($_POST);
-        $link = mysqli_connect('localhost','root','','Student_Information');
+        $link = mysqli_connect('localhost','root','','student_information');
         $sql = "SELECT * FROM students WHERE name like '%$search_item%' || email like '%$search_item%' || mobile like '%$search_item%'";
         if ($result = mysqli_query($link,$sql))
         {

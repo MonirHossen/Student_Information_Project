@@ -12,7 +12,7 @@ class Login
 
         extract($_POST);
         $md5_password = md5($password);
-        $link = mysqli_connect('localhost','root','','Student_Information');
+        $link = mysqli_connect('localhost','root','','student_information');
         $sql = "SELECT * FROM users WHERE email ='$email' && password ='$md5_password'";
 
         if ($queryResult = mysqli_query($link,$sql))
@@ -36,12 +36,11 @@ class Login
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         unset($_SESSION['id']);
         unset($_SESSION['name']);
       header('Location: index.php');
-
-
-
     }
+
 }
