@@ -4,6 +4,8 @@
 namespace App\classes;
 
 
+use mysql_xdevapi\Session;
+
 class Login
 {
     public function adminLoginCheck(){
@@ -18,6 +20,9 @@ class Login
             $user = mysqli_fetch_assoc($queryResult);
               if ($user)
               {
+                  session_start();
+                  $_SESSION['id']   = $user['id'];
+                  $_SESSION['name'] = $user['name'];
                   header('Location: dashboard.php');
               }
               else
@@ -29,5 +34,14 @@ class Login
         {
             die("Query Problem".mysqli_error($link));
         }
+    }
+
+    public function logout(){
+        unset($_SESSION['id']);
+        unset($_SESSION['name']);
+      header('Location: index.php');
+
+
+
     }
 }

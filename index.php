@@ -1,6 +1,12 @@
 <?php
+session_start();
+if (isset($_SESSION['id'])){
+    header('Location: dashboard.php');
+}
+
 require_once "vendor/autoload.php";
 use App\classes\Login;
+
 
 if (isset($_POST['btn'])){
     $user = new Login();

@@ -1,6 +1,13 @@
 <?php
+session_start();
+if ($_SESSION['id'] ==  null)
+{
+    header('Location: index.php');
+}
+
 require_once "vendor/autoload.php";
 use App\classes\Student;
+use App\classes\Login;
 
 $student = new Student();
 
@@ -10,11 +17,19 @@ if (isset($_POST['btn'])){
 
 $result = $student->getStudentInfoById($_GET['id']);
 $data   = mysqli_fetch_assoc($result);
+
+if(isset($_GET['logout'])){
+    $logout = new Login();
+    $logout->logout();
+}
+
 ?>
 
 <hr>
 <a href="dashboard.php">Add Student</a>
 <a href="view-student.php">View Student</a>
+<a href="?logout=true">Logout</a>||
+<a href=""><?php echo $_SESSION['name'];?></a>
 <hr>
 
 <form action="" method="post">
